@@ -8,7 +8,7 @@ app.use(express.json());
 
 
 // Novo endpoint POST para receber JSON e exibir na tela
-app.post('/json', async (req, res) => {
+app.post('/oriondatachatfullvendas', async (req, res) => {
   // Corpo da requisição
   const jsonData = req.body;
 

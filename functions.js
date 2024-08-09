@@ -11,7 +11,8 @@ function TrataDados(data) {
 // Função para enviar os dados ao webhook
 async function enviarParaWebhook(data) {
     try {
-        const response = await axios.post('https://ubiquitous-space', data);
+        const zapluswebhook = 'https://conectawebhook.com.br/api/v1/webhooks-automation/catch/127427/E8ccMbWwwUrP/'
+        const response = await axios.post(zapluswebhook, data);
         return response.status === 200;
     } catch (error) {
         console.error('Erro ao enviar dados para o webhook:', error);
