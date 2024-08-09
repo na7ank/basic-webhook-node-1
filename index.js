@@ -32,7 +32,7 @@ app.post('/oriondatachatfullvendas', async (req, res) => {
 
   res.json({
     message: message,
-    data: jsonData
+    data: jsonData["call-history-was-created"]["ivr_digit_pressed"]
   });
 });
 

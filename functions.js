@@ -3,8 +3,8 @@ const axios = require('axios');
 
 // Função para validar os dados
 function TrataDados(data) {
-    let result = Boolean(data.number) ? 1 : 0;
-    return 1
+    let result = Boolean(data["call-history-was-created"]["ivr_digit_pressed"]) ? 1 : 0;
+    return result
 }
 
 
