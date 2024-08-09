@@ -20,20 +20,15 @@ app.post('/oriondatachatfullvendas', async (req, res) => {
     message = 'Dados Válidos!';
     
     // Envia os dados para o webhook
-    const webhookSuccess = await enviarParaWebhook(jsonData);
     if (webhookSuccess) {
-      message += ' Dados enviados para o webhook com sucesso!';
-    } else {
-      message += ' Falha ao enviar dados para o webhook.';
-    }
-  } else {
-    message = 'Dados Inválidos!';
-  }
+      const data_ok = {
+        number: jsonData["call-history-was-created"]["number"],
+        data: jsonData["call-history-was-created"]["ivr_digit_pressed"]
+      }
+      const webhookSuccess = await enviarParaWebhook(data_ok);
+    } 
+  } 
 
-  res.json({
-    number: jsonData["call-history-was-created"]["number"],
-    data: jsonData["call-history-was-created"]["ivr_digit_pressed"]
-  });
 });
 
 
