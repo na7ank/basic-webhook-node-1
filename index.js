@@ -1,4 +1,4 @@
-const TrataDados = require('./functions')
+const { TrataDados, enviarParaWebhook } = require('./functions');
 const express = require('express');
 const app = express();
 
@@ -8,17 +8,26 @@ app.use(express.json());
 
 
 // Novo endpoint POST para receber JSON e exibir na tela
-app.post('/json', (req, res) => {
+app.post('/json', async (req, res) => {
   // Corpo da requisição
   const jsonData = req.body;
 
   // Trata o JSON
-  const validation = TrataDados(jsonData)
-  let message = ''
+  const validation = TrataDados(jsonData);
+  let message = '';
+
   if (validation) {
-    message = 'Dados Válidos!'
+    message = 'Dados Válidos!';
+    
+    // Envia os dados para o webhook
+    const webhookSuccess = await enviarParaWebhook(jsonData);
+    if (webhookSuccess) {
+      message += ' Dados enviados para o webhook com sucesso!';
+    } else {
+      message += ' Falha ao enviar dados para o webhook.';
+    }
   } else {
-    message = 'Dados Inválidos!'
+    message = 'Dados Inválidos!';
   }
 
   res.json({
