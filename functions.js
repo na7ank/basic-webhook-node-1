@@ -4,7 +4,7 @@ const axios = require('axios');
 // Função para validar os dados
 function TrataDados(data) {
     let result = Boolean(data.number) ? 1 : 0;
-    return result
+    return 1
 }
 
 
