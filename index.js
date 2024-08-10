@@ -9,24 +9,16 @@ app.use(express.json());
 
 // Novo endpoint POST para receber JSON e exibir na tela
 app.post('/oriondatachatfullvendas', async (req, res) => {
-  // Corpo da requisição
-  const jsonData = req.body;
+
+  // Body da requisição
+  const Dados_Ura_Json = req.body;
 
   // Trata o JSON
-  const validation = TrataDados(jsonData);
-  let message = '';
+  const Dados_Ura_Validos = TrataDados(Dados_Ura_Json);
 
-  if (validation) {
-    message = 'Dados Válidos!';
-    
-    // Envia os dados para o webhook
-    if (webhookSuccess) {
-      const data_ok = {
-        number: jsonData["call-history-was-created"]["number"],
-        data: jsonData["call-history-was-created"]["ivr_digit_pressed"]
-      }
-      const webhookSuccess = await enviarParaWebhook(data_ok);
-    } 
+  // Se os dados forem validados
+  if (Dados_Ura_Validos !== false) {
+    const webhookSuccess = await enviarParaWebhook(Dados_Ura_Validos);
   } 
 
 });

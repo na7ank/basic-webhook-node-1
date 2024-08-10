@@ -3,9 +3,18 @@ const axios = require('axios');
 
 // Função para validar os dados
 function TrataDados(data) {
-    let result = Boolean(data["call-history-was-created"]["ivr_digit_pressed"]) ? 1 : 0;
-    return result
+    const { "call-history-was-created": { ivr_digit_pressed, number } } = data;
+
+    if (Boolean(ivr_digit_pressed) && Boolean(number)) {
+        return {
+            number: number,
+            data: ivr_digit_pressed
+        };
+    }
+
+    return false;
 }
+
 
 
 // Função para enviar os dados ao webhook
