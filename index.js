@@ -1,4 +1,4 @@
-const { TrataDados, enviarParaWebhook } = require('./functions');
+const { TrataDados3C, EnviarZaplus } = require('./functions');
 const express = require('express');
 const app = express();
 
@@ -7,18 +7,18 @@ const app = express();
 app.use(express.json());
 
 
-// Novo endpoint POST para receber JSON e exibir na tela
+// Recebe  um POST de 3C
 app.post('/oriondatachatfullvendas', async (req, res) => {
 
   // Body da requisição
   const Dados_Ura_Json = req.body;
 
   // Trata o JSON
-  const Dados_Ura_Validos = TrataDados(Dados_Ura_Json);
+  const Dados_Ura_Validos = TrataDados3C(Dados_Ura_Json);
 
   // Se os dados forem validados
   if (Dados_Ura_Validos !== false) {
-    const webhookSuccess = await enviarParaWebhook(Dados_Ura_Validos);
+    const webhookSuccess = await EnviarZaplus(Dados_Ura_Validos);
   } 
 
 });
