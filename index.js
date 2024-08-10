@@ -10,10 +10,8 @@ app.use(express.json());
 // Recebe  um POST de 3C
 app.post('/oriondatachatfullvendas', async (req, res) => {
 
-  // Body da requisição
-  const Dados_Ura_Json = req.body;
-
   // Trata o JSON
+  const Dados_Ura_Json = req.body;
   const Dados_Ura_Validos = TrataDados3C(Dados_Ura_Json);
 
   // Se os dados forem validados
