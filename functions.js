@@ -1,11 +1,15 @@
 const axios = require('axios');
 
 
-// Função para validar os dados
-function TrataDados3C(data) {
-    const { "call-history-was-created": { ivr_digit_pressed, number } } = data;
+// Envs
+require('dotenv').config();
 
-    if (Boolean(ivr_digit_pressed) && Boolean(number)) {
+
+function TrataDados3C(data) {
+    // Função para validar os dados recebidos do sistema 3C
+    const { "call-history-was-created": { ivr_digit_pressed, number } } = data;
+    if (ivr_digit_pressed == 1 && Boolean(number)) {
+        // Retornaremos os dados apenas se o ivr_digit_pressed for igual a 1 e o number existir
         return {
             number: number,
             data: ivr_digit_pressed
@@ -17,10 +21,10 @@ function TrataDados3C(data) {
 
 
 
-// Função para enviar os dados ao ZAPLUS
 async function EnviarZaplus(data) {
+    // Função para enviar os dados ao sistema ZAPLUS
     try {
-        const Zaplus_Webhook = 'https://conectawebhook.com.br/api/v1/webhooks-automation/catch/127427/E8ccMbWwwUrP/'
+        const Zaplus_Webhook = process.env.API_URL_ZAPLUS;
         const response = await axios.post(Zaplus_Webhook, data);
         return response.status === 200;
     } catch (error) {
@@ -28,5 +32,6 @@ async function EnviarZaplus(data) {
         return false;
     }
 }
+
 
 module.exports = { TrataDados3C, EnviarZaplus };
