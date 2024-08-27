@@ -1,5 +1,5 @@
 # Serviço Básico de Integração
-Objetivo é teste de integração simples entre dois sistemas. Este web serviço receberá dados do sistema 3c e caso os dados sejam validados segundo parâmetros definidos, iremos encaminha-los ao sistema zaplus.
+Teste de integração simples entre dois sistemas. Este web serviço receberá dados do sistema 3c e caso os dados sejam validados segundo parâmetros definidos, iremos encaminha-los ao sistema zaplus.
 
 ## 1 - Iniciando
 - `$ npm init -y`
